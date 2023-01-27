@@ -9,6 +9,7 @@ import (
 )
 
 func exibeIntroducao() {
+
 	nome := os.Getenv("USER")
 	versao := os.Getenv("VERSION")
 
@@ -17,6 +18,7 @@ func exibeIntroducao() {
 }
 
 func leOpcao() int {
+
 	var opcaoLida int
 
 	fmt.Scan(&opcaoLida)
@@ -26,6 +28,7 @@ func leOpcao() int {
 }
 
 func exibeMenu() {
+
 	fmt.Println("1 - Iniciar o monitoramento")
 	fmt.Println("2 - Exibir Logs")
 	fmt.Println("3 - Sair")
@@ -56,7 +59,7 @@ func main() {
 		fmt.Println("Saindo do programa ...")
 		os.Exit(0)
 	default:
-		fmt.Println("Opção inválida")
+		fmt.Println("Opção inválida. Digite novamente.")
 		os.Exit(-1)
 	}
 }
