@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"log"
 	"os"
-
+	"net/http"
+	"time"
 	"github.com/joho/godotenv"
 )
 
@@ -43,6 +44,33 @@ func init() {
 	}
 }
 
+func iniciaMonitoramento() {
+
+	fmt.Println("Monitorando ...")
+	sites := []string{"https://butia.rs.gov.br", "https://google.com.br", "https://terra.com.br", "https://httpstat.us/404"}
+
+	for i := 0; i < 5; i++ {
+		for i, site := range sites {
+			fmt.Println("Testando site", i, ":", site)
+			testaSite(site)
+		}
+		time.Sleep(5 * time.Second)
+	}
+	
+	fmt.Println("")
+
+}
+
+func testaSite(site string) {
+	resp, _ := http.Get(site)
+
+	if resp.StatusCode == 200 {
+		fmt.Println("Site:", site, "foi carregado com sucesso!")
+	} else {
+		fmt.Println("Site:", site, "está com problemas.")
+	}
+}
+
 func main() {
 
 	exibeIntroducao()
@@ -52,7 +80,7 @@ func main() {
 
 	switch opcao {
 	case 1:
-		fmt.Println("Monitorando ...")
+		iniciaMonitoramento()
 	case 2:
 		fmt.Println("Exibindo logs ...")
 	case 3:
